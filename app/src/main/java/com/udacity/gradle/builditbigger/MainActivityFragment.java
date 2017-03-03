@@ -5,15 +5,26 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.lamdbui.jokefactory.JokeFactory;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
+
+    @BindView(R.id.joke_button)
+    public Button mJokeButton;
+
+    private JokeFactory mJokes;
 
     public MainActivityFragment() {
     }
@@ -22,6 +33,17 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
+
+        mJokes = new JokeFactory();
+
+        ButterKnife.bind(this, root);
+
+        mJokeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), mJokes.getJoke(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
         // Create an ad request. Check logcat output for the hashed device ID to
