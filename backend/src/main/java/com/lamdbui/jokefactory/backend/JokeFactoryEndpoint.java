@@ -9,6 +9,7 @@ package com.lamdbui.jokefactory.backend;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.lamdbui.jokefactory.JokeFactory;
 
 import javax.inject.Named;
 
@@ -16,7 +17,7 @@ import javax.inject.Named;
  * An endpoint class we are exposing
  */
 @Api(
-        name = "myApi",
+        name = "jokeFactoryApi",
         version = "v1",
         namespace = @ApiNamespace(
                 ownerDomain = "backend.jokefactory.lamdbui.com",
@@ -24,15 +25,21 @@ import javax.inject.Named;
                 packagePath = ""
         )
 )
-public class MyEndpoint {
+public class JokeFactoryEndpoint {
+
+    private JokeFactory mJokeFactory;
+
+    public JokeFactoryEndpoint() {
+        mJokeFactory = new JokeFactory();
+    }
 
     /**
-     * A simple endpoint method that takes a name and says Hi back
+     * Returns a random joke
      */
-    @ApiMethod(name = "sayHi")
-    public MyBean sayHi(@Named("name") String name) {
-        MyBean response = new MyBean();
-        response.setData("Hi, " + name);
+    @ApiMethod(name = "getJoke")
+    public JokeFactoryBean getJoke() {
+        JokeFactoryBean response = new JokeFactoryBean();
+        response.setData(mJokeFactory.getJoke());
 
         return response;
     }

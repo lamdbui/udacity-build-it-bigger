@@ -9,7 +9,7 @@ import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
-import com.lamdbui.jokefactory.backend.myApi.MyApi;
+import com.lamdbui.jokefactory.backend.jokeFactoryApi.JokeFactoryApi;
 
 import java.io.IOException;
 
@@ -19,17 +19,17 @@ import java.io.IOException;
 
 public class JokeFactoryTask extends AsyncTask<Pair<Context, String>, Void, String> {
 
-    private static MyApi sMyApiService;
+    private static JokeFactoryApi sJokeFactoryApi;
     private Context mContext;
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
 
         // only do this once
-        if(sMyApiService == null) {
+        if(sJokeFactoryApi == null) {
 
             // for local configuration
-            MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
+            JokeFactoryApi.Builder builder = new JokeFactoryApi.Builder(AndroidHttp.newCompatibleTransport(),
                                         new AndroidJsonFactory(), null)
                 // options for running against local devappserver
                 // - 10.0.2.2 is localhost's IP address in Android emulator
@@ -47,14 +47,14 @@ public class JokeFactoryTask extends AsyncTask<Pair<Context, String>, Void, Stri
 //                    .setRootUrl("https://udacity-builditbigger-160500.appspot.com/_ah/api/")
 //                    .setApplicationName("udacity-builditbigger-160500");
 
-            sMyApiService = builder.build();
+            sJokeFactoryApi = builder.build();
         }
 
         mContext = params[0].first;
         String name = params[0].second;
 
         try {
-            return sMyApiService.sayHi(name).execute().getData();
+            return sJokeFactoryApi.getJoke().execute().getData();
         }
         catch(IOException e) {
             return e.getMessage();
