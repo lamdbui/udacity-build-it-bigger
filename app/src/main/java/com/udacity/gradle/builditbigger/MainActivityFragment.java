@@ -1,7 +1,9 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +43,8 @@ public class MainActivityFragment extends Fragment {
         mJokeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), mJokes.getJoke(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), mJokes.getJoke(), Toast.LENGTH_SHORT).show();
+                new JokeFactoryTask().execute(new Pair<Context, String>(getActivity(), "Lam"));
             }
         });
 
