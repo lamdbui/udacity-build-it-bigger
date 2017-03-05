@@ -25,10 +25,13 @@ public class JokeFactoryTask extends AsyncTask<Pair<Context, String>, Void, Stri
     private JokeFactoryTaskListener mCallback;
     private String mArgString;  // could be used later for arguments
 
-    // Caller needs to implement this!
+    // Caller must implement this, if they need additional notifications!
     public interface JokeFactoryTaskListener {
 
-        public void finishedFetching();
+        public void finishedFetching(String result);
+    }
+
+    public JokeFactoryTask() {
     }
 
     public JokeFactoryTask(JokeFactoryTaskListener callback) {
@@ -76,9 +79,8 @@ public class JokeFactoryTask extends AsyncTask<Pair<Context, String>, Void, Stri
 
     @Override
     protected void onPostExecute(String result) {
-        //JokeFactoryTaskListener caller = (JokeFactoryTaskListener) mContext;
-        //caller.finishedFetching();
-        mCallback.finishedFetching();
-        Toast.makeText(mContext, result, Toast.LENGTH_LONG).show();
+        if(mCallback != null)
+            mCallback.finishedFetching(result);
+        //Toast.makeText(mContext, result, Toast.LENGTH_LONG).show();
     }
 }

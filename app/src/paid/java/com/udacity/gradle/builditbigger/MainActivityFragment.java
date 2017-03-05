@@ -35,7 +35,7 @@ public class MainActivityFragment extends Fragment
     }
 
     @Override
-    public void finishedFetching() {
+    public void finishedFetching(String result) {
         mProgressBar.setVisibility(View.GONE);
     }
 

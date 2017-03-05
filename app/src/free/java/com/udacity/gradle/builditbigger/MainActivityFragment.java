@@ -35,12 +35,19 @@ public class MainActivityFragment extends Fragment
     @BindView(R.id.progress_bar)
     ProgressBar mProgressBar;
 
+    @BindView(R.id.joke_text_view)
+    TextView mJokeTextView;
+
     public MainActivityFragment() {
     }
 
     @Override
-    public void finishedFetching() {
+    public void finishedFetching(String result) {
         mProgressBar.setVisibility(View.GONE);
+
+        if(result != null) {
+            mJokeTextView.setText(result);
+        }
     }
 
     @Override
