@@ -12,8 +12,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.udacity.gradle.builditbigger.JokeFactoryTask;
 import com.udacity.gradle.builditbigger.R;
 
@@ -37,6 +39,8 @@ public class MainActivityFragment extends Fragment
 
     @BindView(R.id.joke_text_view)
     TextView mJokeTextView;
+
+    InterstitialAd mInterstitialAd;
 
     public MainActivityFragment() {
     }
@@ -65,9 +69,15 @@ public class MainActivityFragment extends Fragment
             @Override
             public void onClick(View view) {
                 mProgressBar.setVisibility(View.VISIBLE);
+                if(mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
                 new JokeFactoryTask(callback).execute(new Pair<Context, String>(getActivity(), ""));
             }
         });
+
+        mInterstitialAd = new InterstitialAd(getActivity());
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.
@@ -76,6 +86,9 @@ public class MainActivityFragment extends Fragment
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         mAdView.loadAd(adRequest);
+
+        mInterstitialAd.loadAd(adRequest);
+
         return root;
     }
 }

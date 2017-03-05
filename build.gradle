@@ -17,3 +17,24 @@ allprojects {
         jcenter()
     }
 }
+
+task testApp {
+    dependsOn(['startAppEngine', 'runTests', 'stopAppEngine'])
+}
+
+task runTests {
+    dependsOn ':app:connectedAndroidTest'
+    mustRunAfter 'startAppEngine'
+}
+
+task startAppEngine {
+    dependsOn ':backend:appengineRun'
+    evaluationDependsOn(':backend')
+    project(':backend').appengine.daemon = true
+    finalizedBy ':backend:appengineStop'
+}
+
+task stopAppEngine {
+    dependsOn ':backend:appengineStop'
+    mustRunAfter 'runTests'
+}

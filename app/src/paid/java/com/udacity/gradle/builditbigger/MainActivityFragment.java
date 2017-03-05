@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.udacity.gradle.builditbigger.JokeFactoryTask;
@@ -31,12 +32,19 @@ public class MainActivityFragment extends Fragment
     @BindView(R.id.progress_bar)
     ProgressBar mProgressBar;
 
+    @BindView(R.id.joke_text_view)
+    TextView mJokeTextView;
+
     public MainActivityFragment() {
     }
 
     @Override
     public void finishedFetching(String result) {
         mProgressBar.setVisibility(View.GONE);
+
+        if(result != null) {
+            mJokeTextView.setText(result);
+        }
     }
 
     @Override
