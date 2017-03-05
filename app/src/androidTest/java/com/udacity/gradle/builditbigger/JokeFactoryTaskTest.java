@@ -27,7 +27,7 @@ public class JokeFactoryTaskTest {
         String result = null;
 
         JokeFactoryTask jokeFactoryTask = new JokeFactoryTask();
-        jokeFactoryTask.execute(new Pair<Context, String>(getContext(), "Lam"));
+        jokeFactoryTask.execute(new Pair<Context, String>(getContext(), ""));
 
         try {
             result = jokeFactoryTask.get();

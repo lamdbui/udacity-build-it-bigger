@@ -19,8 +19,10 @@ import java.io.IOException;
 
 public class JokeFactoryTask extends AsyncTask<Pair<Context, String>, Void, String> {
 
+
     private static JokeFactoryApi sJokeFactoryApi;
     private Context mContext;
+    private String mArgString;  // could be used later for arguments
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
@@ -51,7 +53,7 @@ public class JokeFactoryTask extends AsyncTask<Pair<Context, String>, Void, Stri
         }
 
         mContext = params[0].first;
-        String name = params[0].second;
+        mArgString = params[0].second;
 
         try {
             return sJokeFactoryApi.getJoke().execute().getData();

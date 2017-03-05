@@ -1,4 +1,5 @@
-package com.udacity.gradle.builditbigger;
+package com.udacity.gradle.builditbigger.free;
+
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,16 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.udacity.gradle.builditbigger.JokeFactoryTask;
+import com.udacity.gradle.builditbigger.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
 /**
- * A placeholder fragment containing a simple view.
+ * A simple {@link Fragment} subclass.
  */
 public class MainActivityFragment extends Fragment {
 
