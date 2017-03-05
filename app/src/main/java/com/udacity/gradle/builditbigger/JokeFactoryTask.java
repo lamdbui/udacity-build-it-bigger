@@ -22,7 +22,18 @@ public class JokeFactoryTask extends AsyncTask<Pair<Context, String>, Void, Stri
 
     private static JokeFactoryApi sJokeFactoryApi;
     private Context mContext;
+    private JokeFactoryTaskListener mCallback;
     private String mArgString;  // could be used later for arguments
+
+    // Caller needs to implement this!
+    public interface JokeFactoryTaskListener {
+
+        public void finishedFetching();
+    }
+
+    public JokeFactoryTask(JokeFactoryTaskListener callback) {
+        mCallback = callback;
+    }
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
@@ -65,6 +76,9 @@ public class JokeFactoryTask extends AsyncTask<Pair<Context, String>, Void, Stri
 
     @Override
     protected void onPostExecute(String result) {
+        //JokeFactoryTaskListener caller = (JokeFactoryTaskListener) mContext;
+        //caller.finishedFetching();
+        mCallback.finishedFetching();
         Toast.makeText(mContext, result, Toast.LENGTH_LONG).show();
     }
 }
