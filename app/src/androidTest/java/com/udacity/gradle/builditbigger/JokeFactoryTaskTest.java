@@ -19,8 +19,6 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class JokeFactoryTaskTest {
 
-    private static final String LOG_TAG = "JokeFactoryTaskTest";
-
     @Test
     public void returnsValidString() {
 
@@ -31,10 +29,8 @@ public class JokeFactoryTaskTest {
 
         try {
             result = jokeFactoryTask.get();
-            Log.d(LOG_TAG, "Success! String received: " + result);
         }
         catch(Exception e) {
-            Log.d(LOG_TAG, e.getMessage());
             e.printStackTrace();
         }
 
