@@ -18,8 +18,6 @@ import com.udacity.gradle.builditbigger.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.os.SystemClock.sleep;
-
 /**
  * A simple {@link Fragment} subclass.
  */
