@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -38,9 +37,6 @@ public class MainActivityFragment extends Fragment
     @BindView(R.id.progress_bar)
     ProgressBar mProgressBar;
 
-    @BindView(R.id.joke_text_view)
-    TextView mJokeTextView;
-
     InterstitialAd mInterstitialAd;
 
     public MainActivityFragment() {
@@ -49,10 +45,6 @@ public class MainActivityFragment extends Fragment
     @Override
     public void finishedFetching(String result) {
         mProgressBar.setVisibility(View.GONE);
-
-//        if(result != null) {
-//            mJokeTextView.setText(result);
-//        }
 
         Intent jokeDisplayIntent = JokeActivity.newIntent(getActivity(), result);
         startActivity(jokeDisplayIntent);

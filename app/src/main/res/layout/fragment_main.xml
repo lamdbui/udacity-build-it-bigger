@@ -28,16 +28,6 @@
         android:onClick="tellJoke"
         android:text="@string/button_text" />
 
-    <TextView
-        android:id="@+id/joke_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/item_margin"
-        android:layout_below="@id/joke_button"
-        android:textSize="@dimen/joke_text_size"
-        tools:text="JOKE TEXT HERE. HEHE :)" />
-
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
