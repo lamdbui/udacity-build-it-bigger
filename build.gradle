@@ -23,7 +23,7 @@ task testApp {
 }
 
 task runTests {
-    dependsOn ':app:connectedAndroidTest'
+    dependsOn ([':app:connectedAndroidTest', ':jokedisplay:connectedAndroidTest'])
     mustRunAfter 'startAppEngine'
 }
 
