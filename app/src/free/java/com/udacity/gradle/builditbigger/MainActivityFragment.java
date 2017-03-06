@@ -2,6 +2,7 @@ package com.udacity.gradle.builditbigger;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
@@ -18,6 +19,7 @@ import com.google.android.gms.ads.InterstitialAd;
 import com.udacity.gradle.builditbigger.JokeFactoryTask;
 import com.udacity.gradle.builditbigger.R;
 
+import app.com.lamdbui.android.jokedisplay.JokeActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -48,9 +50,12 @@ public class MainActivityFragment extends Fragment
     public void finishedFetching(String result) {
         mProgressBar.setVisibility(View.GONE);
 
-        if(result != null) {
-            mJokeTextView.setText(result);
-        }
+//        if(result != null) {
+//            mJokeTextView.setText(result);
+//        }
+
+        Intent jokeDisplayIntent = JokeActivity.newIntent(getActivity(), result);
+        startActivity(jokeDisplayIntent);
     }
 
     @Override
