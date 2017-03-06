@@ -15,6 +15,7 @@ contains ads(banner and interstitial) to be displayed to the user while the 'pai
 
 ###JokeFactory
 * Java library that randomly returns a joke from a set list of jokes
+* This is able to be run locally or deployed to a Google Cloud Endpoint, but needs reconfigured code to be enabled in JokeFactoryTask.java
 
 ###JokeDisplay
 * Android library housing an Activity that is passed a joke via an Intent and displays the joke
@@ -23,5 +24,5 @@ contains ads(banner and interstitial) to be displayed to the user while the 'pai
 * Progress spinner shown when a joke is being fetched from the GCE and cleared when finished
 
 ### Unit Tests
-* Gradle task that launches a GCE local development server and runs basic tests (UI, libraries, and main app)
-* Available in: app:other:runTests
+* Available automated Gradle task that launches a GCE local development server and runs basic tests (UI, libraries, and main app)
+* Located at: app:other:runTests
