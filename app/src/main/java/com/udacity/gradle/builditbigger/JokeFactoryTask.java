@@ -23,11 +23,12 @@ public class JokeFactoryTask extends AsyncTask<Pair<Context, String>, Void, Stri
     private Context mContext;
     private JokeFactoryTaskListener mCallback;
     private String mArgString;  // could be used later for arguments
+    private boolean mFetchSuccess;
 
     // Caller must implement this, if they need additional notifications!
     public interface JokeFactoryTaskListener {
 
-        public void finishedFetching(String result);
+        public void finishedFetching(boolean success, String result);
     }
 
     public JokeFactoryTask() {
@@ -69,9 +70,11 @@ public class JokeFactoryTask extends AsyncTask<Pair<Context, String>, Void, Stri
         mArgString = params[0].second;
 
         try {
+            mFetchSuccess = true;
             return sJokeFactoryApi.getJoke().execute().getData();
         }
         catch(IOException e) {
+            mFetchSuccess = false;
             return e.getMessage();
         }
     }
@@ -79,6 +82,6 @@ public class JokeFactoryTask extends AsyncTask<Pair<Context, String>, Void, Stri
     @Override
     protected void onPostExecute(String result) {
         if(mCallback != null)
-            mCallback.finishedFetching(result);
+            mCallback.finishedFetching(mFetchSuccess, result);
     }
 }

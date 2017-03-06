@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -37,17 +38,34 @@ public class MainActivityFragment extends Fragment
     @BindView(R.id.progress_bar)
     ProgressBar mProgressBar;
 
-    InterstitialAd mInterstitialAd;
+    private InterstitialAd mInterstitialAd;
 
     public MainActivityFragment() {
     }
 
     @Override
-    public void finishedFetching(String result) {
+    public void finishedFetching(boolean success, String result) {
         mProgressBar.setVisibility(View.GONE);
 
-        Intent jokeDisplayIntent = JokeActivity.newIntent(getActivity(), result);
-        startActivity(jokeDisplayIntent);
+        if(success) {
+            // only load the Ad on success
+            // NOTE: this only gets loaded once
+            AdRequest adRequest = new AdRequest.Builder()
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .build();
+            mInterstitialAd.loadAd(adRequest);
+
+            Intent jokeDisplayIntent = JokeActivity.newIntent(getActivity(), result);
+            startActivity(jokeDisplayIntent);
+        }
+        // display a Toast with the error if the joke fetching didn't work
+        else {
+            String errorString = getString(R.string.error_fetching_joke);
+            if(result != null) {
+                errorString = errorString + " " + result;
+            }
+            Toast.makeText(getActivity(), errorString, Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -82,8 +100,6 @@ public class MainActivityFragment extends Fragment
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         mAdView.loadAd(adRequest);
-
-        mInterstitialAd.loadAd(adRequest);
 
         return root;
     }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import app.com.lamdbui.android.jokedisplay.JokeActivity;
 import butterknife.BindView;
@@ -31,11 +32,21 @@ public class MainActivityFragment extends Fragment
     }
 
     @Override
-    public void finishedFetching(String result) {
+    public void finishedFetching(boolean success, String result) {
         mProgressBar.setVisibility(View.GONE);
 
-        Intent jokeDisplayIntent = JokeActivity.newIntent(getActivity(), result);
-        startActivity(jokeDisplayIntent);
+        if(success) {
+            Intent jokeDisplayIntent = JokeActivity.newIntent(getActivity(), result);
+            startActivity(jokeDisplayIntent);
+        }
+        // display a Toast with the error if the joke fetching didn't work
+        else {
+            String errorString = getString(R.string.error_fetching_joke);
+            if(result != null) {
+                errorString = errorString + " " + result;
+            }
+            Toast.makeText(getActivity(), errorString, Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

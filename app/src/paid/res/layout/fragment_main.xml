@@ -25,7 +25,6 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/instructions_text_view"
         android:layout_margin="@dimen/item_margin"
-        android:onClick="tellJoke"
         android:text="@string/button_text" />
     
     <ProgressBar

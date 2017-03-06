@@ -12,6 +12,7 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static android.support.test.espresso.Espresso.onView;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.hamcrest.Matchers.not;
 
@@ -26,8 +27,7 @@ public class MainActivityTest {
             new ActivityTestRule<MainActivity>(MainActivity.class);
 
     @Test
-    public void tellJokeShouldDisplayJokeInTextView() {
-        Espresso.onView(withId(R.id.joke_button)).perform(click());
-        Espresso.onView(withId(R.id.joke_text_view)).check(matches(withText(not(isEmptyOrNullString()))));
+    public void verifyJokeInstructionsDisplayed() {
+        onView(withId(R.id.instructions_text_view)).check(matches(withText(R.string.instructions)));
     }
 }
