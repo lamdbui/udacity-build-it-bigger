@@ -10,10 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.udacity.gradle.builditbigger.JokeFactoryTask;
-import com.udacity.gradle.builditbigger.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
